@@ -1,0 +1,57 @@
+name: Test force-skip-ci label
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: github.event.label.name != 'force-skip-ci'
+    steps:
+      - name: Show environment
+        env:
+          DEBUG: true
+          HUB_VERBOSE: true
+        run: |
+          echo "labels: ${{ github.event.label }}"
+
+          # FIXME: DEBUG:
+          echo "::debug::GITHUB_WORKSPACE"
+          echo "$GITHUB_WORKSPACE"
+
+          # FIXME: DEBUG:
+          echo "::debug::PWD"
+          pwd
+          ls -al
+
+          # FIXME: DEBUG:
+          echo "::debug::PATH: $PATH"
+          echo $PATH
+
+          export PATH="/usr/local/bin:$PATH"
+
+          # FIXME: DEBUG:
+          echo "::debug::hub"
+          command -v hub || true
+
+          # FIXME: DEBUG:
+          echo "::debug::hub issues"
+          hub issue || true
+
+          # FIXME: DEBUG:
+          echo "::debug::hub PRs"
+          hub pr list || true
+
+          # FIXME: DEBUG:
+          echo "::debug::git details"
+          git ls-files -v || true
+          git branch || true
+          git remote -v || true
+          git status || true
+
+          # FIXME: DEBUG:
+          echo "::debug::/usr/local/bin:"
+          sudo ls -l /usr/local/bin || true
