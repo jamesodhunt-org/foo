@@ -17,9 +17,10 @@ jobs:
         env:
           DEBUG: true
           HUB_VERBOSE: true
+          GITHUB_CONTEXT: ${{ toJson(github.event.pull_request) }}
         run: |
           echo "github JSON context:"
-          echo ${{ toJson(github.event.pull_request) }}
+          echo "${GITHUB_CONTEXT}"
 
           # FIXME: DEBUG:
           echo "::debug::GITHUB_WORKSPACE"
