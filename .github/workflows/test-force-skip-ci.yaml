@@ -9,14 +9,15 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event.label.name != 'force-skip-ci'
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'force-skip-ci') }}
     steps:
       - name: Show environment
         env:
           DEBUG: true
           HUB_VERBOSE: true
         run: |
-          echo "labels: ${{ github.event.label }}"
+          echo "github JSON context:"
+          echo ${{ toJson(github) }}
 
           # FIXME: DEBUG:
           echo "::debug::GITHUB_WORKSPACE"
