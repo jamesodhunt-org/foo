@@ -1,4 +1,4 @@
-name: Add a label to show the approximate "size" of a PR.
+name: Add PR sizing label
 
 on:
   pull_request_target:
@@ -24,5 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.KATA_GITHUB_ACTIONS_TOKEN }}
         run: |
           pr=${{ github.event.number }}
+
+          sudo apt -y install diffstat
 
           add-pr-size-label.sh "$pr"
