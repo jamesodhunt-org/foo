@@ -10,6 +10,9 @@ jobs:
   add-pr-size-label:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
       - name: Install PR sizing label script
         run: |
           # Clone into a temporary directory to avoid overwriting
