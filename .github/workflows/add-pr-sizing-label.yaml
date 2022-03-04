@@ -24,7 +24,7 @@ jobs:
 
       - name: Add PR sizing label
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_ACTIONS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_PR_SIZE_LABEL_SECRET }}
         run: |
           pr=${{ github.event.number }}
 
