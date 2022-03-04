@@ -1,0 +1,28 @@
+name: Add a label to show the approximate "size" of a PR.
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+
+jobs:
+  add-pr-size-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PR sizing label script
+        run: |
+          # Clone into a temporary directory to avoid overwriting
+          # any existing github directory.
+          pushd $(mktemp -d) &>/dev/null
+          git clone --single-branch --depth 1 "https://github.com/jamesodhunt-org/.github" && cd .github/scripts
+          sudo install add-pr-size-label.sh /usr/local/bin
+          popd &>/dev/null
+
+      - name: Add PR sizing label
+        env:
+          GITHUB_TOKEN: ${{ secrets.KATA_GITHUB_ACTIONS_TOKEN }}
+        run: |
+          pr=${{ github.event.number }}
+
+          add-pr-size-label.sh "$pr"
