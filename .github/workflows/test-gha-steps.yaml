@@ -1,0 +1,42 @@
+name: Test GHA steps
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+
+jobs:
+  test-gha-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: |
+
+        export JAMES=1
+
+        echo "::debug::step-1: normal env JAMES: '$JAMES'"
+        echo "::debug::step-1: gh env JAMES: ${{ env.JAMES }}"
+
+      - name: Step 2
+        run: |
+        echo "::debug::step-2: normal env JAMES: '$JAMES'"
+        echo "::debug::step-2: gh env JAMES: ${{ env.JAMES }}"
+
+      - name: Step 3
+        run: |
+        echo "::debug::step-3: normal env JAMES: '$JAMES'"
+        echo "::debug::step-3: gh env JAMES: ${{ env.JAMES }}"
+
+      - name: Step 4 (change var)
+        run: |
+
+        export JAMES=2
+
+        echo "::debug::step-4-change-var: normal env JAMES: '$JAMES'"
+        echo "::debug::step-4-change-var: gh env JAMES: ${{ env.JAMES }}"
+
+      - name: Step 5
+        run: |
+        echo "::debug::step-5: normal env JAMES: '$JAMES'"
+        echo "::debug::step-5: gh env JAMES: ${{ env.JAMES }}"
