@@ -1,2 +1,2 @@
 default:
-	@echo "INFO: hello, world"
+	@echo "INFO: Hello, world"

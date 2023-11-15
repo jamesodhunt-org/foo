@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "INFO: $0"
+echo "INFO: name of script: $0"
