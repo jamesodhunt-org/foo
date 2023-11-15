@@ -1,0 +1,46 @@
+# Order in this file is important. Only the last match will be
+# used. See https://help.github.com/articles/about-code-owners/
+
+VERSION				@jamesodhunt-org/release
+
+# The versions database needs careful handling
+versions.yaml			@jamesodhunt-org/ci @jamesodhunt-org/release @jamesodhunt-org/tests
+
+# Documentation related files could also appear anywhere
+# else in the repo.
+*.drawio			@jamesodhunt-org/documentation
+*.jpg				@jamesodhunt-org/documentation
+*.md				@jamesodhunt-org/documentation
+*.png				@jamesodhunt-org/documentation
+*.svg				@jamesodhunt-org/documentation
+
+# FIXME: need to create the "build" team
+Makefile*			@jamesodhunt-org/build
+*.mak				@jamesodhunt-org/build
+*.mk				@jamesodhunt-org/build
+
+# FIXME: need to create the "platforms" team (arch is too similar to the AC!)
+**/arch/			@jamesodhunt-org/platforms
+
+# FIXME: Maybe a new "protocol" team would be better?
+# All protocol changes must be reviewed.
+# Note, we include all subdirs, including the vendor dir, as at present there are no .proto files
+# in the vendor dir. Later we may have to extend this matching rule if that changes.
+/src/libs/protocols/*.proto	@jamesodhunt-org/packaging
+
+# GitHub Actions
+/.github/workflows/		@jamesodhunt-org/ci
+
+/ci/				@jamesodhunt-org/ci @jamesodhunt-org/tests
+/docs/				@jamesodhunt-org/documentation
+
+/snap/				@jamesodhunt-org/release    # FIXME: need to create the "release" team
+
+/src/agent/			@jamesodhunt-org/agent
+/src/runtime*/			@jamesodhunt-org/runtime
+/src/tools/			@jamesodhunt-org/tools    # FIXME: need to create the "tools" team
+
+/tools/osbuilder/		@jamesodhunt-org/builder
+/tools/packaging/		@jamesodhunt-org/packaging
+/tools/packaging/kernel/	@jamesodhunt-org/kernel
+/tools/packaging/release/	@jamesodhunt-org/release    # FIXME: need to create the "release" team
